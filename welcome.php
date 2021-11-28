@@ -17,15 +17,15 @@ if ($stmt = mysqli_prepare($link, $sql)) {
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $username, $is_staff, $email);
         if (!mysqli_stmt_fetch($stmt)) {
-            echo "Ошибка!";
+            echo "error fetch request!";
             exit;
         }
     } else {
-        echo "Ошибка!";
+        echo "Error execute request!";
         exit;
     }
 } else {
-    echo "Ошибка!";
+    echo "Error prepare request!";
     exit;
 }
 ?>
