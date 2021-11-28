@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="invalid-feedback"><?php echo $username_err; ?></span>
         </div>
 
-        <div class="form-floating">
+        <div class="form-floating mb-3">
             <input type="password" name="password"
                    class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword"
                    placeholder="Password" value="<?php echo $password; ?>">
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="invalid-feedback"><?php echo $password_err; ?></span>
         </div>
 
-        <div class="form-floating">
+        <div class="form-floating mb-3">
             <input type="password" name="confirm_password"
                    class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>"
                    id="floatingPasswordc" placeholder="Password" value="<?php echo $confirm_password; ?>">

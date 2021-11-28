@@ -118,8 +118,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <label for="floatingInput">Имя пользователя</label>
             <span class="invalid-feedback"><?php echo $username_err; ?></span>
         </div>
+
         <div class="form-floating">
-            <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Password">
+            <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Пароль</label>
             <span class="invalid-feedback"><?php echo $password_err; ?></span>
         </div>
