@@ -1,5 +1,5 @@
 <?php
-require('db.php');
+require("db.php");
 include("auth.php");
 ?>
 <!DOCTYPE html>
