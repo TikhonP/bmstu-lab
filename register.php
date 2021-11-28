@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    header("location: register_authed.php");
+    exit;
+}
+
 // Include config file
 require_once "config.php";
 
@@ -150,6 +159,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="mt-2">Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
         </div>
     </form>
+    <divider></divider>
+    <div class="container text-center">
+        <p class="text-secondary">ИУ4-11Б</p>
+    </div>
 </div>
 </body>
 </html>

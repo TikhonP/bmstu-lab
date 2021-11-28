@@ -26,10 +26,19 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 </head>
 <body>
 <div class="container">
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-md">
+            <a class="navbar-brand" href="#">Привет, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</a>
+        </div>
+        <a class="d-flex nav-link" href="logout.php">Выйти из аккаунта</a>
+    </nav>
     <p>
-        <a href="logout.php" class="btn btn-danger ml-3">Выйти из аккаунта</a>
+        контент
     </p>
+    <divider></divider>
+    <div class="container text-center">
+        <p class="text-secondary">ИУ4-11Б</p>
+    </div>
 </div>
 </body>
 </html>
