@@ -123,8 +123,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <label for="floatingPassword">Пароль</label>
             <span class="invalid-feedback"><?php echo $password_err; ?></span>
         </div>
-        <button type="submit" class="btn btn-primary">Войти</button>
-        <p>Еще нет аккаунта? <a href="register.php">Зарегистрироваться</a>.</p>
+        <button type="submit" class="btn btn-primary mt-2">Войти</button>
+        <p class="mt-2">Еще нет аккаунта? <a href="register.php">Зарегистрироваться</a>.</p>
     </form>
 </div>
 </body>

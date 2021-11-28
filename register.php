@@ -129,20 +129,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="form-floating">
-            <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Password" value="<?php echo $password; ?>">
+            <input type="password" name="password"
+                   class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword"
+                   placeholder="Password" value="<?php echo $password; ?>">
             <label for="floatingPassword">Пароль</label>
             <span class="invalid-feedback"><?php echo $password_err; ?></span>
         </div>
 
         <div class="form-floating">
-            <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Password" value="<?php echo $confirm_password; ?>">
-            <label for="floatingPassword">Подтвердите пароль</label>
+            <input type="password" name="confirm_password"
+                   class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>"
+                   id="floatingPasswordc" placeholder="Password" value="<?php echo $confirm_password; ?>">
+            <label for="floatingPasswordc">Подтвердите пароль</label>
             <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-        <button type="reset" class="btn btn-secondary ml-2">Сбросить</button>
-        <p>Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
+        <div class="container">
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            <button type="reset" class="btn btn-secondary ml-2">Сбросить</button>
+            <p class="mt-2">Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
+        </div>
     </form>
 </div>
 </body>
