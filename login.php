@@ -137,10 +137,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit" class="btn btn-primary mt-2">Войти</button>
         <p class="mt-2">Еще нет аккаунта? <a href="register.php">Зарегистрироваться</a>.</p>
     </form>
-    <divider></divider>
-    <div class="container text-center">
-        <p class="text-secondary">ИУ4-11Б</p>
-    </div>
+    <footer class="border-top">
+        <div class="container text-center">
+            <p class="text-secondary">ИУ4-11Б</p>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

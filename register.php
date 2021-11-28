@@ -159,10 +159,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="mt-2">Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
         </div>
     </form>
-    <divider></divider>
-    <div class="container text-center">
-        <p class="text-secondary">ИУ4-11Б</p>
-    </div>
+    <footer class="border-top">
+        <div class="container text-center">
+            <p class="text-secondary">ИУ4-11Б</p>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

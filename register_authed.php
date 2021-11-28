@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: register.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,10 +36,11 @@
         Вы уже зашли как, <?php echo htmlspecialchars($_SESSION["username"]); ?>.
         <a href="logout.php">Выйти и зарегистрироваться под другим именем?</a>
     </p>
-    <divider></divider>
-    <div class="container text-center">
-        <p class="text-secondary">ИУ4-11Б</p>
-    </div>
+    <footer class="border-top">
+        <div class="container text-center">
+            <p class="text-secondary">ИУ4-11Б</p>
+        </div>
+    </footer>
 </div>
 </body>
 </html>
