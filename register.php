@@ -160,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </form>
     <footer class="border-top">
-        <div class="container text-center">
+        <div class="container text-center mt-2">
             <p class="text-secondary">ИУ4-11Б</p>
         </div>
     </footer>

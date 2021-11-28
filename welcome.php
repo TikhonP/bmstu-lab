@@ -35,10 +35,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <p>
         контент
     </p>
-    <divider></divider>
-    <div class="container text-center">
-        <p class="text-secondary">ИУ4-11Б</p>
-    </div>
+    <footer class="border-top">
+        <div class="container text-center mt-2">
+            <p class="text-secondary">ИУ4-11Б</p>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

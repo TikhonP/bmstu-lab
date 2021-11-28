@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p class="mt-2">Еще нет аккаунта? <a href="register.php">Зарегистрироваться</a>.</p>
     </form>
     <footer class="border-top">
-        <div class="container text-center">
+        <div class="container text-center mt-2">
             <p class="text-secondary">ИУ4-11Б</p>
         </div>
     </footer>
