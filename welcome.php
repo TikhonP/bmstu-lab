@@ -27,6 +27,7 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     }
 } else {
     echo "Error prepare request!";
+    echo mysqli_stmt_error($stmt);
     exit;
 }
 ?>
