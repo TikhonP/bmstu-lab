@@ -7,6 +7,27 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
     exit;
 }
+
+$sql = "SELECT username, is_staff, email FROM users WHERE id = ?";
+
+if ($stmt = mysqli_prepare($link, $sql)) {
+    mysqli_stmt_bind_param($stmt, "i", $_SESSION["id"]);
+
+    if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_store_result($stmt);
+        mysqli_stmt_bind_result($stmt, $username, $is_staff, $email);
+        if (!mysqli_stmt_fetch($stmt)) {
+            echo "Ошибка!";
+            exit;
+        }
+    } else {
+        echo "Ошибка!";
+        exit;
+    }
+} else {
+    echo "Ошибка!";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +51,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <div class="container-md">
             <a class="navbar-brand" href="#">Привет, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</a>
         </div>
+        <?php echo ($is_staff) ? "<a class='nav-link' href='create_product.php'>Создать товар</a>" : ''; ?>
         <a class="d-flex nav-link" href="logout.php">Выйти из аккаунта</a>
     </nav>
     <p>
