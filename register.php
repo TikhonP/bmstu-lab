@@ -98,7 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Redirect to login page
                 header("location: login.php");
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Ой! Что-то пошло не так. Попробуйте еще раз позже.";
+                echo mysqli_stmt_error($stmt);
             }
 
             // Close statement
@@ -147,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="form-floating mb-3">
             <input type="email" name="email"
                    class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" id="floatingInputE"
-                   placeholder="username" value="<?php echo email; ?>">
+                   placeholder="username" value="<?php echo $email; ?>">
             <label for="floatingInputE">Email</label>
             <span class="invalid-feedback"><?php echo $email_err; ?></span>
         </div>
