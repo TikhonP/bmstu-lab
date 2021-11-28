@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign Up</title>
+    <title>Регистрация</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -117,35 +117,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <div class="container text-center">
-    <h2>Sign Up</h2>
-    <p>Please fill this form to create an account.</p>
+    <h2>Регистрация</h2>
+    <p>Пожалуйста, заполните все поля, чтобы войти в аккаунт.</p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-group">
-            <label>Username</label>
+        <div class="form-floating mb-3">
             <input type="text" name="username"
-                   class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
-                   value="<?php echo $username; ?>">
+                   class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="floatingInput"
+                   placeholder="username" value="<?php echo $username; ?>">
+            <label for="floatingInput">Имя пользователя</label>
             <span class="invalid-feedback"><?php echo $username_err; ?></span>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password"
-                   class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"
-                   value="<?php echo $password; ?>">
+
+        <div class="form-floating">
+            <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Password" value="<?php echo $password; ?>">
+            <label for="floatingPassword">Пароль</label>
             <span class="invalid-feedback"><?php echo $password_err; ?></span>
         </div>
-        <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" name="confirm_password"
-                   class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>"
-                   value="<?php echo $confirm_password; ?>">
+
+        <div class="form-floating">
+            <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword" placeholder="Password" value="<?php echo $confirm_password; ?>">
+            <label for="floatingPassword">Подтвердите пароль</label>
             <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
         </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Submit">
-            <input type="reset" class="btn btn-secondary ml-2" value="Reset">
-        </div>
-        <p>Already have an account? <a href="login.php">Login here</a>.</p>
+
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        <button type="reset" class="btn btn-secondary ml-2">Сбросить</button>
+        <p>Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
     </form>
 </div>
 </body>
