@@ -1,7 +1,7 @@
 <?php
 // Enter your Host, username, password, database below.
 // I left password empty because i do not set password on localhost.
-$con = mysqli_connect("localhost","tikhon","raspberry1","register");
+$conn = mysqli_connect("localhost", "rozhko40_iu4db", "oF&M0YU&", "rozhko40_iu4db");
 // Check connection
 if (mysqli_connect_errno())
   {
