@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty(trim($_POST["email"]))) {
-        $email_err = "Пожалуйста введите email.";
+        $email = "";
     } else {
         $email = trim($_POST["email"]);
     }
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password, $param_email);
+            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_email);
 
             // Set parameters
             $param_username = $username;
