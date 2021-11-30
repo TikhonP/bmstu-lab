@@ -63,7 +63,7 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
     <h1>Добавление продукта.</h1>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-floating">
+        <div class="form-floating mb-3">
             <select type="text" name="type"
                     class="form-select <?php echo (!empty($product_type_err)) ? 'is-invalid' : ''; ?>"
                     id="floatingSelect" aria-label="Floating label select example"
@@ -78,7 +78,7 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
         </div>
 
         <div class="form-floating mb-3">
-            <label for="nameField" class="form-label">Название</label>
+            <label for="nameField">Название</label>
             <input type="text" name="name"
                    class="form-control <?php echo (!empty($product_name_err)) ? 'is-invalid' : ''; ?>" id="nameField"
                    value="<?php echo ($product_name != '') ? $product_name : ''; ?>" required>
