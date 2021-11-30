@@ -33,6 +33,8 @@ if ($stmt = mysqli_prepare($link, $sql)) {
         echo "Error execute request!";
         exit;
     }
+
+    mysqli_stmt_close($stmt);
 } else {
     echo "Error prepare request!";
     echo mysqli_stmt_error($stmt);
@@ -88,7 +90,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt = mysqli_prepare($link, $sql)) {
                 mysqli_stmt_bind_param($stmt, "ssssis", $product_type, $product_name,
-                    $product_description, $product_manufacturer, $product_price, $filename);
+                    $product_description, $product_manufacturer, $product_price, $param_filename);
+
+                $param_filename = basename($filename);
 
                 if (mysqli_stmt_execute($stmt)) {
                     header("location: welcome.php");
@@ -97,6 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "error with sql request";
                     echo mysqli_stmt_error($stmt);
                 }
+
+                mysqli_stmt_close($stmt);
             } else {
                 echo "Error with prepare sql request";
             }
