@@ -42,15 +42,14 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 $product_type = $product_name = $product_description = $product_manufacturer = $product_price = $product_image = "";
 $product_type_err = $product_name_err = $product_description_err = $product_manufacturer_err = $product_price_err = $product_image_err = "";
 
-echo "here";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "here";
 
     $filename = tempnam($upload_dir, '');
     unlink($filename);
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) {
-        echo "here";
+
         if (empty(trim($_POST["type"]))) {
             $product_type_err = "Пожалуйста, введите типа продукта.";
         } else {
@@ -84,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($product_type_err) && empty($product_name_err) && empty($product_description_err)
             && empty($product_manufacturer_err) && empty($product_manufacturer_err) && empty($product_price_err)
             && empty($product_image_err)) {
-            echo "here";
+
             $sql = "INSERT INTO  product (type, name, description, manufacturer, price, image) VALUES (?, ?, ?, ?, ?, ?)";
 
             if ($stmt = mysqli_prepare($link, $sql)) {
@@ -96,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 } else {
                     echo "error with sql request";
+                    echo mysqli_stmt_error($stmt);
                 }
             } else {
                 echo "Error with prepare sql request";
@@ -185,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="invalid-feedback"><?php echo $product_image_err; ?></span>
         </div>
 
-<!--        <input type="hidden" name="MAX_FILE_SIZE" value="30000"/>-->
+        <!--        <input type="hidden" name="MAX_FILE_SIZE" value="30000"/>-->
 
         <button type="submit" class="btn btn-primary">Добавить продукт</button>
     </form>
