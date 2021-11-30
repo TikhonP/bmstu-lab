@@ -77,7 +77,7 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
             <span class="invalid-feedback"><?php echo $product_type_err; ?></span>
         </div>
 
-        <div class="mb-3">
+        <div class="form-floating mb-3">
             <label for="nameField" class="form-label">Название</label>
             <input type="text" name="name"
                    class="form-control <?php echo (!empty($product_name_err)) ? 'is-invalid' : ''; ?>" id="nameField"
@@ -85,7 +85,7 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
             <span class="invalid-feedback"><?php echo $product_name_err; ?></span>
         </div>
 
-        <div class="form-floating">
+        <div class="form-floating mb-3">
             <textarea type="text" name="description"
                       class="form-control <?php echo (!empty($product_description_err)) ? 'is-invalid' : ''; ?>"
                       placeholder="Leave a comment here" id="floatingTextarea"
@@ -97,8 +97,7 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
         <div class="form-floating mb-3">
             <input type="number" name="price"
                    class="form-control <?php echo (!empty($product_price_err)) ? 'is-invalid' : ''; ?>"
-                   id="floatingInput" placeholder=""
-                   value="<?php echo ($product_price != '') ? $product_price : ''; ?>">
+                   id="floatingInput" placeholder="">
             <label for="floatingInput">Цена</label>
             <span class="invalid-feedback"><?php echo $product_price_err; ?></span>
         </div>
