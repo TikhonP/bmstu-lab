@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "INSERT INTO  product (type, name, description, manufacturer, price, image) VALUES (?, ?, ?, ?, ?, ?)";
 
             if ($stmt = mysqli_prepare($link, $sql)) {
-                mysqli_stmt_bind_param($stmt, "ssssi", $product_type, $product_name,
+                mysqli_stmt_bind_param($stmt, "ssssis", $product_type, $product_name,
                     $product_description, $product_manufacturer, $product_price, $filename);
 
                 if (mysqli_stmt_execute($stmt)) {
