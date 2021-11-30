@@ -3,6 +3,8 @@
 session_start();
 require_once "config.php";
 
+$upload_dir = '/home/r/rozhko40/rozhko40.beget.tech/public_html/media/';
+
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: login.php");
@@ -39,6 +41,68 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 
 $product_type = $product_name = $product_description = $product_manufacturer = $product_price = $product_image = "";
 $product_type_err = $product_name_err = $product_description_err = $product_manufacturer_err = $product_price_err = $product_image_err = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $filename = tempnam($upload_dir, '');
+    unlink($filename);
+
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) {
+
+        if (empty(trim($_POST["type"]))) {
+            $product_type_err = "Пожалуйста, введите типа продукта.";
+        } else {
+            $product_type = trim($_POST["type"]);
+        }
+
+        if (empty(trim($_POST["name"]))) {
+            $product_name_err = "Пожалуйста, введите имя продукта.";
+        } else {
+            $product_name = trim($_POST["name"]);
+        }
+
+        if (empty(trim($_POST["description"]))) {
+            $product_description_err = "Пожалуйста, введите описание продукта.";
+        } else {
+            $product_description = trim($_POST["description"]);
+        }
+
+        if (empty(trim($_POST["manufacturer"]))) {
+            $product_manufacturer_err = "Пожалуйста, введите производителя продукта.";
+        } else {
+            $product_manufacturer = trim($_POST["manufacturer"]);
+        }
+
+        if (empty(trim($_POST["price"]))) {
+            $product_price_err = "Пожалуйста, введите цену продукта.";
+        } else {
+            $product_price = trim($_POST["price"]);
+        }
+
+        if (empty($product_type_err) && empty($product_name_err) && empty($product_description_err)
+            && empty($product_manufacturer_err) && empty($product_manufacturer_err) && empty($product_price_err)
+            && empty($product_image_err)) {
+
+            $sql = "INSERT INTO  product (type, name, description, manufacturer, price, image) VALUES (?, ?, ?, ?, ?, ?)";
+
+            if ($stmt = mysqli_prepare($link, $sql)) {
+                mysqli_stmt_bind_param($stmt, "ssssi", $product_type, $product_name,
+                    $product_description, $product_manufacturer, $product_price, $filename);
+
+                if (mysqli_stmt_execute($stmt)) {
+                    header("location: welcome.php");
+                    exit();
+                } else {
+                    echo "error with sql request";
+                }
+            } else {
+                echo "Error with prepare sql request";
+            }
+        }
+
+    } else {
+        $product_image_err = "Ошибка загрузки файла";
+    }
+}
 ?>
 
 <!doctype html>
@@ -62,7 +126,7 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
     </nav>
     <h1>Добавление продукта.</h1>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
         <div class="form-floating mb-3">
             <select type="text" name="type"
                     class="form-select <?php echo (!empty($product_type_err)) ? 'is-invalid' : ''; ?>"
@@ -95,6 +159,15 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
         </div>
 
         <div class="form-floating mb-3">
+            <label for="nameField">Производитель</label>
+            <input type="text" name="manufacturer"
+                   class="form-control <?php echo (!empty($product_manufacturer_err)) ? 'is-invalid' : ''; ?>"
+                   id="nameField"
+                   value="<?php echo ($product_manufacturer != '') ? $product_manufacturer : ''; ?>">
+            <span class="invalid-feedback"><?php echo $product_manufacturer_err; ?></span>
+        </div>
+
+        <div class="form-floating mb-3">
             <input type="number" name="price"
                    class="form-control <?php echo (!empty($product_price_err)) ? 'is-invalid' : ''; ?>"
                    id="floatingInput" placeholder="">
@@ -108,6 +181,8 @@ $product_type_err = $product_name_err = $product_description_err = $product_manu
                    type="file" id="formFile">
             <span class="invalid-feedback"><?php echo $product_image_err; ?></span>
         </div>
+
+        <input type="hidden" name="MAX_FILE_SIZE" value="30000"/>
 
         <button type="submit" class="btn btn-primary">Добавить продукт</button>
     </form>
