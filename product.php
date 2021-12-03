@@ -1,7 +1,12 @@
 <?php
+
+echo $_SERVER["QUERY_STRING"];
+
 $parts = parse_url($_SERVER["QUERY_STRING"]);
 parse_str($parts['query'], $query);
 $product_id = $query['p'];
+
+echo $product_id;
 
 $sql = "SELECT id, type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
 
