@@ -3,6 +3,8 @@ $parts = parse_url($url);
 parse_str($parts['query'], $query);
 $product_id = $query['p'];
 
+echo $product_id;
+
 $sql = "SELECT id, type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
@@ -16,13 +18,19 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 
             if (mysqli_stmt_fetch($stmt)) {
 
-            } else { echo "error fetch request"; }
+            } else {
+                echo "error fetch request";
+            }
         } else {
             http_response_code(404);
             exit;
         }
-    } else { echo "error with execute sql"; }
-} else { echo "Error with prepare sql"; }
+    } else {
+        echo "error with execute sql";
+    }
+} else {
+    echo "Error with prepare sql";
+}
 ?>
 
 <!doctype html>
@@ -39,18 +47,18 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 <body>
 <h1>Продукт</h1>
 <div class="container">
-<div class="card">
-    <img src="/media/<?= $image ?>" class="card-img-top" alt="<?= $name ?>">
-    <div class="card-body">
-        <div class="card-header">
-            <?= $type ?>
+    <div class="card">
+        <img src="/media/<?= $image ?>" class="card-img-top" alt="<?= $name ?>">
+        <div class="card-body">
+            <div class="card-header">
+                <?= $type ?>
+            </div>
+            <h5 class="card-title"><?= $name ?></h5>
+            <h6 class="card-subtitle mb-2 text-muted"></h6<?= $manufacturer ?></h6>
+            <p class="card-text"><?= $description ?></p>
+            <p class="card-text"><small class="text-muted">Цена: <?= $price ?>, оценка: <?= $rate ?></small></p>
         </div>
-        <h5 class="card-title"><?= $name ?></h5>
-        <h6 class="card-subtitle mb-2 text-muted"></h6<?= $manufacturer ?></h6>
-        <p class="card-text"><?= $description ?></p>
-        <p class="card-text"><small class="text-muted">Цена: <?= $price ?>, оценка: <?= $rate ?></small></p>
     </div>
-</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
