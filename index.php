@@ -88,10 +88,11 @@ function display_data($data)
 <table class="table">
     <?php
     $query = "SELECT * FROM product";
-    $result = mysql_query($link, $query);
+    $result = mysqli_query($link, $sql);
+    mysqli_fetch_all($result, MYSQLI_ASSOC);
     display_data($result);
-
-    mysql_close();
+    mysqli_free_result($result);
+    mysqli_close($link);
     ?>
 </table>
 <footer class="border-top">
