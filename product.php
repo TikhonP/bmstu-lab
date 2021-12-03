@@ -1,7 +1,7 @@
 <?php
 $parts = parse_url($url);
 parse_str($parts['query'], $query);
-$product_id = $query['id'];
+$product_id = $query['p'];
 
 $sql = "SELECT id, type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
 
