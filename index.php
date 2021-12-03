@@ -54,7 +54,7 @@ function display_data($data)
                     if ($col != "name") {
                         $output .= '<td>' . $val . '</td>';
                     } else {
-                        $output .= '<a href="/product.php?p=' . $id . '"><td>' . $val . '</td></a>';
+                        $output .= '<td><a href="/product.php?p=' . $id . '">' . $val . '</td></a>';
                     }
                 } else {
                     $id = $val;
@@ -87,12 +87,12 @@ function display_data($data)
             <a class="navbar-brand" href="#">Привет, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</a>
         </div>
         <?php echo ($is_staff) ? "<a class='nav-link' href='create_product.php'>Создать товар</a>" : ''; ?>
-        <a class="d-flex nav-link" href="logout.php">Выйти из аккаунта</a>
+        <a class="d-flex nav-link" href="/logout.php">Выйти из аккаунта</a>
     <?php else: ?>
         <div class="container-md">
             <a class="navbar-brand" href="#">Привет</b>.</a>
         </div>
-        <a class="d-flex nav-link" href="login.php">Войти</a>
+        <a class="d-flex nav-link" href="/login.php">Войти</a>
     <?php endif ?>
 </nav>
 <div class="container">
