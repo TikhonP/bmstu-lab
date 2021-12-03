@@ -54,6 +54,7 @@ function display_data($data)
     }
     echo $output;
 }
+
 ?>
 
 
@@ -83,26 +84,24 @@ function display_data($data)
         <a class="d-flex nav-link" href="login.php">Войти</a>
     <?php endif ?>
 </nav>
-<table class="table">
-    <?php
-    $query = "SELECT * FROM product";
-    $result = mysqli_query($link, $query);
-//    mysqli_fetch_all($result, MYSQLI_BOTH);
-    if(! $result ) {
-        die('Could not get data: ' . mysqli_error());
-    }
+<div class="container">
+    <table class="table">
+        <?php
+        $query = "SELECT type, name, description, manufacturer, price, rate FROM product";
+        $result = mysqli_query($link, $query);
+        //    mysqli_fetch_all($result, MYSQLI_BOTH);
+        if (!$result) {
+            die('Could not get data: ' . mysqli_error());
+        }
 
-    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        echo "EMP ID :{$row['emp_id']}  <br> ".
-            "EMP NAME : {$row['emp_name']} <br> ".
-            "EMP SALARY : {$row['emp_salary']} <br> ".
-            "--------------------------------<br>";
-    }
-    display_data($result);
-    mysqli_free_result($result);
-    mysqli_close($link);
-    ?>
-</table>
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { }
+
+        display_data($result);
+        mysqli_free_result($result);
+        mysqli_close($link);
+        ?>
+    </table>
+</div>
 <footer class="border-top">
     <div class="container text-center mt-2">
         <p class="text-secondary">ИУ4-11Б</p>
