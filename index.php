@@ -105,7 +105,7 @@ function display_data($data)
         }
 
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { }
-ц
+
         display_data($result);
         mysqli_free_result($result);
         mysqli_close($link);
