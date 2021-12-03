@@ -89,7 +89,8 @@ function display_data($data)
     <?php
     $query = "SELECT * FROM product";
     $result = mysqli_query($link, $sql);
-    mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_fetch_all($result, MYSQLI_BOTH);
+    echo $result;
     display_data($result);
     mysqli_free_result($result);
     mysqli_close($link);
