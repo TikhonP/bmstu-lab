@@ -31,6 +31,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
 
 function display_data($data)
 {
+    $id = "";
     $output = "";
     foreach ($data as $key => $var) {
         //$output .= '<tr>';
@@ -50,7 +51,7 @@ function display_data($data)
             $output .= '<tr>';
             foreach ($var as $col => $val) {
                 if ($col != "id") {
-                    if ($col == "name") {
+                    if ($col != "name") {
                         $output .= '<td>' . $val . '</td>';
                     } else {
                         $output .= '<a href="/product.php?p=' . $id . '"><td>' . $val . '</td></a>';
