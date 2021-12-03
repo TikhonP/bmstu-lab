@@ -1,9 +1,6 @@
 <?php
 
-echo $_SERVER["QUERY_STRING"];
-
-$parts = parse_url($_SERVER["QUERY_STRING"]);
-parse_str($parts['query'], $query);
+parse_str($_SERVER["QUERY_STRING"], $query);
 $product_id = $query['p'];
 
 echo $product_id;
