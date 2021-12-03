@@ -37,7 +37,9 @@ function display_data($data)
         if ($key === 0) {
             $output .= '<tr>';
             foreach ($var as $col => $val) {
-                $output .= "<td>" . $col . '</td>';
+                if ($col != "id") {
+                    $output .= "<td>" . $col . '</td>';
+                }
             }
             $output .= '</tr>';
             foreach ($var as $col => $val) {
@@ -47,7 +49,15 @@ function display_data($data)
         } else {
             $output .= '<tr>';
             foreach ($var as $col => $val) {
-                $output .= '<td>' . $val . '</td>';
+                if ($col != "id") {
+                    if ($col == "name") {
+                        $output .= '<td>' . $val . '</td>';
+                    } else {
+                        $output .= '<a href="/product.php?p=' . $id . '"><td>' . $val . '</td></a>';
+                    }
+                } else {
+                    $id = $val;
+                }
             }
             $output .= '</tr>';
         }
@@ -87,7 +97,7 @@ function display_data($data)
 <div class="container">
     <table class="table">
         <?php
-        $query = "SELECT type, name, description, manufacturer, price, rate FROM product";
+        $query = "SELECT id, name, type, description, manufacturer, price, rate FROM product";
         $result = mysqli_query($link, $query);
         //    mysqli_fetch_all($result, MYSQLI_BOTH);
         if (!$result) {
@@ -95,7 +105,7 @@ function display_data($data)
         }
 
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) { }
-
+ц
         display_data($result);
         mysqli_free_result($result);
         mysqli_close($link);
