@@ -28,6 +28,34 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
         exit;
     }
 }
+
+function display_data($data)
+{
+    $output = "<table>";
+    foreach ($data as $key => $var) {
+        //$output .= '<tr>';
+        if ($key === 0) {
+            $output .= '<tr>';
+            foreach ($var as $col => $val) {
+                $output .= "<td>" . $col . '</td>';
+            }
+            $output .= '</tr>';
+            foreach ($var as $col => $val) {
+                $output .= '<td>' . $val . '</td>';
+            }
+            $output .= '</tr>';
+        } else {
+            $output .= '<tr>';
+            foreach ($var as $col => $val) {
+                $output .= '<td>' . $val . '</td>';
+            }
+            $output .= '</tr>';
+        }
+    }
+    $output .= '</table>';
+    echo $output;
+}
+
 ?>
 
 
@@ -45,26 +73,23 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <?php if (isset($_SESSION["loggedin"])): ?>
-    <div class="container-md">
-        <a class="navbar-brand" href="#">Привет, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</a>
-    </div>
-    <?php echo ($is_staff) ? "<a class='nav-link' href='create_product.php'>Создать товар</a>" : ''; ?>
-    <a class="d-flex nav-link" href="logout.php">Выйти из аккаунта</a>
+        <div class="container-md">
+            <a class="navbar-brand" href="#">Привет, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</a>
+        </div>
+        <?php echo ($is_staff) ? "<a class='nav-link' href='create_product.php'>Создать товар</a>" : ''; ?>
+        <a class="d-flex nav-link" href="logout.php">Выйти из аккаунта</a>
     <?php else: ?>
-    <div class="container-md">
-        <a class="navbar-brand" href="#">Привет</b>.</a>
-    </div>
-    <a class="d-flex nav-link" href="login.php">Войти</a>
+        <div class="container-md">
+            <a class="navbar-brand" href="#">Привет</b>.</a>
+        </div>
+        <a class="d-flex nav-link" href="login.php">Войти</a>
     <?php endif ?>
 </nav>
 <table class="table">
     <?php
     $query = "SELECT * FROM product";
-    $result = mysql_query($query);
-
-    while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
-        echo "<tr><td>" . $row['name'] . "</td><td>" . $row['age'] . "</td></tr>";  //$row['index'] the index here is a field name
-    }
+    $result = mysql_query($link, $query);
+    display_data($result);
 
     mysql_close();
     ?>
