@@ -31,7 +31,7 @@ if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true) {
 
 function display_data($data)
 {
-    $output = "<table>";
+    $output = "";
     foreach ($data as $key => $var) {
         //$output .= '<tr>';
         if ($key === 0) {
@@ -52,10 +52,8 @@ function display_data($data)
             $output .= '</tr>';
         }
     }
-    $output .= '</table>';
     echo $output;
 }
-
 ?>
 
 
@@ -88,7 +86,7 @@ function display_data($data)
 <table class="table">
     <?php
     $query = "SELECT * FROM product";
-    $result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $query);
     mysqli_fetch_all($result, MYSQLI_BOTH);
     echo $result;
     display_data($result);
