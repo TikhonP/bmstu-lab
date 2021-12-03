@@ -87,8 +87,17 @@ function display_data($data)
     <?php
     $query = "SELECT * FROM product";
     $result = mysqli_query($link, $query);
-    mysqli_fetch_all($result, MYSQLI_ASSOC);
-    echo $result;
+//    mysqli_fetch_all($result, MYSQLI_BOTH);
+    if(! $result ) {
+        die('Could not get data: ' . mysqli_error());
+    }
+
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        echo "EMP ID :{$row['emp_id']}  <br> ".
+            "EMP NAME : {$row['emp_name']} <br> ".
+            "EMP SALARY : {$row['emp_salary']} <br> ".
+            "--------------------------------<br>";
+    }
     display_data($result);
     mysqli_free_result($result);
     mysqli_close($link);
