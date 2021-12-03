@@ -1,9 +1,7 @@
 <?php
-$parts = parse_url($url);
+$parts = parse_url($_SERVER["QUERY_STRING"]);
 parse_str($parts['query'], $query);
 $product_id = $query['p'];
-
-echo $product_id;
 
 $sql = "SELECT id, type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
 
@@ -16,9 +14,7 @@ if ($stmt = mysqli_prepare($link, $sql)) {
         if (mysqli_stmt_num_rows($stmt) == 0) {
             mysqli_stmt_bind_result($stmt, $id, $type, $name, $description, $manufacturer, $price, $rate, $image);
 
-            if (mysqli_stmt_fetch($stmt)) {
-
-            } else {
+            if (!mysqli_stmt_fetch($stmt)) {
                 echo "error fetch request";
             }
         } else {
@@ -30,6 +26,8 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     }
 } else {
     echo "Error with prepare sql";
+    echo mysqli_stmt_error($stmt);
+    exit;
 }
 ?>
 
