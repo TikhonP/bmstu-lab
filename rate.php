@@ -19,7 +19,7 @@ if ($stmt = mysqli_prepare($link, $sql)) {
         mysqli_stmt_bind_result($stmt, $id, $username, $is_staff, $email);
         if (mysqli_stmt_fetch($stmt)) {
             if (!$is_staff) {
-                header("location: welcome.php");
+                header("location: index.php");
                 exit;
             }
         } else {

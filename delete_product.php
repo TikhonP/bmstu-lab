@@ -38,27 +38,39 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     exit;
 }
 
-if (empty(trim($_POST["product"]))) {
-    echo "Error empty product_id";
-} else {
-    $product_id = trim($_POST["product"]);
-}
+parse_str($_SERVER["QUERY_STRING"], $query);
+$product_id = $query['p'];
 
-if (empty(trim($_POST["comment"]))) {
-    echo "Error empty comment";
-} else {
-    $comment = trim($_POST["comment"]);
-}
-$sql = "INSERT INTO comment (text, creator_user, product) VALUES (?, ?, ?)";
+$sql = "DELETE FROM comment WHERE product = ?";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
-    mysqli_stmt_bind_param($stmt, "sii", $comment, $id, $product_id);
+    mysqli_stmt_bind_param($stmt, "i", $product_id);
 
-    if (mysqli_stmt_execute($stmt)) {
-        header("location: product.php?p=$product_id");
-    } else {
-        echo "Ой! Что-то пошло не так. Попробуйте еще раз позже.";
-        echo mysqli_stmt_error($stmt);
+    if (!mysqli_stmt_execute($stmt)) {
+        echo "error delete comments";
+        exit;
     }
 }
+
+$sql = "DELETE FROM rate WHERE product = ?";
+if ($stmt = mysqli_prepare($link, $sql)) {
+    mysqli_stmt_bind_param($stmt, "i", $product_id);
+
+    if (!mysqli_stmt_execute($stmt)) {
+        echo "error delete rate";
+        exit;
+    }
+}
+
+$sql = "DELETE FROM product WHERE id = ?";
+if ($stmt = mysqli_prepare($link, $sql)) {
+    mysqli_stmt_bind_param($stmt, "i", $product_id);
+
+    if (!mysqli_stmt_execute($stmt)) {
+        echo "error delete product";
+        exit;
+    }
+}
+
+header("location: index.php");
 ?>

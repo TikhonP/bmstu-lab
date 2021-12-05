@@ -22,7 +22,7 @@ if ($stmt = mysqli_prepare($link, $sql)) {
         mysqli_stmt_bind_result($stmt, $id, $username, $is_staff, $email);
         if (mysqli_stmt_fetch($stmt)) {
             if (!$is_staff) {
-                header("location: welcome.php");
+                header("location: index.php");
                 exit;
             }
         } else {
@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $param_filename = basename($filename);
 
                 if (mysqli_stmt_execute($stmt)) {
-                    header("location: welcome.php");
+                    header("location: index.php");
                     exit();
                 } else {
                     echo "error with sql request";

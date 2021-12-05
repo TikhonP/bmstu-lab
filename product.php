@@ -76,6 +76,7 @@ if ($user_is_authed) {
 <body>
 <div class="container mb-3">
     <h1>Продукт</h1>
+    <?php echo ($is_staff) ? "<a href='/delete_product.php?p=$product_id'>Удалить продукт.</a>" : ''; ?>
     <div class="shadow">
         <div class="card">
             <div class="card-header">
