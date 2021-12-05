@@ -5,7 +5,7 @@ require_once "config.php";
 parse_str($_SERVER["QUERY_STRING"], $query);
 $product_id = $query['p'];
 
-$sql = "SELECT id, type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
+$sql = "SELECT type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
     mysqli_stmt_bind_param($stmt, "i", $product_id);
@@ -28,7 +28,6 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     }
 } else {
     echo "Error with prepare sql";
-    echo mysqli_stmt_error($stmt);
     exit;
 }
 ?>
