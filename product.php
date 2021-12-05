@@ -46,18 +46,20 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     <title>Продукт - <?= $name ?></title>
 </head>
 <body>
-<h1>Продукт</h1>
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <?= $type ?>
-        </div>
-        <img src="/media/<?= $image ?>" class="card-img-top" alt="<?= $name ?>">
-        <div class="card-body">
-            <h5 class="card-title"><?= $name ?></h5>
-            <h6 class="card-subtitle mb-2 text-muted"></h6<?= $manufacturer ?></h6>
-            <p class="card-text"><?= $description ?></p>
-            <p class="card-text"><small class="text-muted">Цена: <?= $price ?>, оценка: <?= $rate ?></small></p>
+    <h1>Продукт</h1>
+    <div class="shadow">
+        <div class="card">
+            <div class="card-header">
+                <?= $type ?>
+            </div>
+            <img src="/media/<?= $image ?>" class="card-img-top" alt="<?= $name ?>">
+            <div class="card-body">
+                <h5 class="card-title"><?= $name ?></h5>
+                <h6 class="card-subtitle mb-2 text-muted"></h6<?= $manufacturer ?></h6>
+                <p class="card-text"><?= $description ?></p>
+                <p class="card-text"><small class="text-muted">Цена: <?= $price ?>, оценка: <?= $rate ?></small></p>
+            </div>
         </div>
     </div>
 </div>
