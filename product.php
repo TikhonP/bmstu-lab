@@ -1,9 +1,9 @@
 <?php
 
+require_once "config.php";
+
 parse_str($_SERVER["QUERY_STRING"], $query);
 $product_id = $query['p'];
-
-echo $product_id;
 
 $sql = "SELECT id, type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
 
