@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once "config.php";
 
 parse_str($_SERVER["QUERY_STRING"], $query);
@@ -32,6 +33,33 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     echo "Error with prepare sql";
     exit;
 }
+
+$user_is_authed = (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true);
+if ($user_is_authed) {
+    $sql = "SELECT id, username, is_staff, email FROM users WHERE username = ?";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        mysqli_stmt_bind_param($stmt, "s", $param_username);
+        $param_username = $_SESSION["username"];
+
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+            mysqli_stmt_bind_result($stmt, $id, $username, $is_staff, $email);
+            if (!mysqli_stmt_fetch($stmt)) {
+                echo "error fetch request!";
+                exit;
+            }
+        } else {
+            echo "Error execute request!";
+            exit;
+        }
+    } else {
+        echo "Error prepare request!";
+        echo mysqli_stmt_error($stmt);
+        exit;
+    }
+}
+
 ?>
 
 <!doctype html>
@@ -62,6 +90,35 @@ if ($stmt = mysqli_prepare($link, $sql)) {
             </div>
         </div>
     </div>
+
+    <?php
+    if ($user_is_authed) {
+        ?>
+        <div class="mt-3">
+            <form method="post" action="/rate.php">
+                <label for="customRange2" class="form-label">Оценить продукт</label>
+                <input type="range" name="rate" class="form-range" min="0" max="5" id="customRange2">
+                <input type="hidden" name="product" value="$product_id">
+                <button type="submit" class="btn btn-primary">Оценить</button>
+            </form>
+        </div>
+
+        <div class="mt-3">
+            <form method="post" action="/comment.php">
+                <div class="mb-3">
+                    <textarea name="comment" placeholder="Комментарий" class="form-control"
+                              id="exampleFormControlTextarea1"
+                              rows="3"></textarea>
+                    <input type="hidden" name="product" value="$product_id">
+                    <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+                </div>
+            </form>
+        </div>
+        <?php
+    }
+    ?>
+
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
