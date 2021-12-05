@@ -38,10 +38,10 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     exit;
 }
 
-if (empty(trim($_POST["product_id"]))) {
+if (empty(trim($_POST["product"]))) {
     echo "Error empty product_id";
 } else {
-    $product_id = trim($_POST["product_id"]);
+    $product_id = trim($_POST["product"]);
 }
 
 if (empty(trim($_POST["comment"]))) {
