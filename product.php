@@ -49,11 +49,11 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 <h1>Продукт</h1>
 <div class="container">
     <div class="card">
+        <div class="card-header">
+            <?= $type ?>
+        </div>
         <img src="/media/<?= $image ?>" class="card-img-top" alt="<?= $name ?>">
         <div class="card-body">
-            <div class="card-header">
-                <?= $type ?>
-            </div>
             <h5 class="card-title"><?= $name ?></h5>
             <h6 class="card-subtitle mb-2 text-muted"></h6<?= $manufacturer ?></h6>
             <p class="card-text"><?= $description ?></p>
