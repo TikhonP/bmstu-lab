@@ -74,7 +74,7 @@ if ($user_is_authed) {
     <title>Продукт - <?= $name ?></title>
 </head>
 <body>
-<div class="container">
+<div class="container mb-3">
     <h1>Продукт</h1>
     <div class="shadow">
         <div class="card">

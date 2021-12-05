@@ -56,7 +56,21 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     mysqli_stmt_bind_param($stmt, "iii", $rate, $id, $product_id);
 
     if (mysqli_stmt_execute($stmt)) {
+        $sql = "SELECT Avg(rate) FROM rate WHERE product = ?";
 
+        if ($stmt = mysqli_prepare($link, $sql)) {
+            mysqli_stmt_bind_param($stmt, "i", $product_id);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_store_result($stmt);
+
+                mysqli_stmt_bind_result($stmt, $avr_rate);
+
+                if (mysqli_stmt_fetch($stmt)) {
+                    echo "avr rate $avr_rate";
+                }
+            }
+        }
 
         header("location: product.php?p=$product_id");
     } else {
