@@ -98,7 +98,7 @@ if ($user_is_authed) {
             <form method="post" action="/rate.php">
                 <label for="customRange2" class="form-label">Оценить продукт</label>
                 <input type="range" name="rate" class="form-range" min="0" max="5" id="customRange2">
-                <input type="hidden" name="product" value="$product_id">
+                <input type="hidden" name="product" value="<?= $product_id ?>">
                 <button type="submit" class="btn btn-primary">Оценить</button>
             </form>
         </div>
@@ -109,9 +109,9 @@ if ($user_is_authed) {
                     <textarea name="comment" placeholder="Комментарий" class="form-control"
                               id="exampleFormControlTextarea1"
                               rows="3"></textarea>
-                    <input type="hidden" name="product" value="$product_id">
-                    <button type="submit" class="btn btn-primary">Добавить комментарий</button>
                 </div>
+                <input type="hidden" name="product" value="<?= $product_id ?>">
+                <button type="submit" class="btn btn-primary">Добавить комментарий</button>
             </form>
         </div>
         <?php
