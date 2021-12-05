@@ -118,6 +118,27 @@ if ($user_is_authed) {
     }
     ?>
 
+    <?php
+    $query = "SELECT text FROM comment WHERE product = $product_id";
+    $result = mysqli_query($link, $query);
+    //    mysqli_fetch_all($result, MYSQLI_BOTH);
+    if (!$result) {
+        die('Could not get data: ' . mysqli_error());
+    }
+
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {}
+
+    foreach ($result as $key => $var) {
+        echo "<div class='card'>
+  <div class='card-body'>
+    " . $var["text"] . "
+  </div>
+</div>";
+    }
+    mysqli_free_result($result);
+    mysqli_close($link);
+    ?>
+
 
 </div>
 
