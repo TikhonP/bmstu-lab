@@ -5,7 +5,7 @@ require_once "config.php";
 parse_str($_SERVER["QUERY_STRING"], $query);
 $product_id = $query['p'];
 
-$sql = "SELECT type, name, description, manufacturer, price, rate, image FROM users WHERE id = ?";
+$sql = "SELECT id, type, name, description, manufacturer, price, rate, image FROM product WHERE id = ?";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
     mysqli_stmt_bind_param($stmt, "i", $product_id);
