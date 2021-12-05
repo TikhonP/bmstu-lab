@@ -117,7 +117,7 @@ if ($user_is_authed) {
         <?php
     }
     ?>
-
+    <h3 class="mt-3">Комментарии:</h3>
     <?php
     $query = "SELECT text FROM comment WHERE product = $product_id";
     $result = mysqli_query($link, $query);
@@ -129,7 +129,7 @@ if ($user_is_authed) {
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {}
 
     foreach ($result as $key => $var) {
-        echo "<div class='card'>
+        echo "<div class='card mt-3'>
   <div class='card-body'>
     " . $var["text"] . "
   </div>

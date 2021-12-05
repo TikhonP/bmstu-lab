@@ -55,7 +55,6 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     mysqli_stmt_bind_param($stmt, "sii", $comment, $id, $product_id);
 
     if (mysqli_stmt_execute($stmt)) {
-        // Redirect to login page
         header("location: product.php?p=$product_id");
     } else {
         echo "Ой! Что-то пошло не так. Попробуйте еще раз позже.";
