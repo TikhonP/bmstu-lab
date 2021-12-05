@@ -21,7 +21,8 @@ if ($stmt = mysqli_prepare($link, $sql)) {
             }
         } else {
             http_response_code(404);
-            echo "404";
+            echo "404 ";
+            echo $product_id;
             exit;
         }
     } else {
