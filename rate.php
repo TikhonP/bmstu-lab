@@ -50,7 +50,7 @@ if (empty(trim($_POST["rate"]))) {
     $rate = trim($_POST["rate"]);
 }
 
-$sql = "INSERT INTO comment (rate, creator_user, product) VALUES (?, ?, ?)";
+$sql = "INSERT INTO rate (rate, creator_user, product) VALUES (?, ?, ?)";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
     mysqli_stmt_bind_param($stmt, "iii", $rate, $id, $product_id);
