@@ -40,12 +40,14 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 
 if (empty(trim($_POST["product"]))) {
     echo "Error empty product_id";
+    exit;
 } else {
     $product_id = trim($_POST["product"]);
 }
 
 if (empty(trim($_POST["rate"]))) {
     echo "Error empty rate";
+    exit;
 } else {
     $rate = trim($_POST["rate"]);
 }
@@ -67,12 +69,19 @@ if ($stmt = mysqli_prepare($link, $sql)) {
                 mysqli_stmt_bind_result($stmt, $avr_rate);
 
                 if (mysqli_stmt_fetch($stmt)) {
-                    echo "avr rate $avr_rate";
+
+                    $sql = "UPDATE product SET rate = ? WHERE product.id = ?";
+
+                    if ($stmt = mysqli_prepare($link, $sql)) {
+                        mysqli_stmt_bind_param($stmt, "di", $avr_rate, $product_id);
+
+                        if (mysqli_stmt_execute($stmt)) {
+                            header("location: product.php?p=$product_id");
+                        }
+                    }
                 }
             }
         }
-
-        header("location: product.php?p=$product_id");
     } else {
         echo "Ой! Что-то пошло не так. Попробуйте еще раз позже.";
         echo mysqli_stmt_error($stmt);
