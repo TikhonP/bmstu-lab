@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="container">
-            <button onclick="commitForm()" class="btn btn-primary">Зарегистрироваться</button>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
             <button type="reset" class="btn btn-secondary ml-2">Сбросить</button>
             <p class="mt-2">Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
         </div>
