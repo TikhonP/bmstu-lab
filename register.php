@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="container">
-            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            <button onclick="commitForm()" class="btn btn-primary">Зарегистрироваться</button>
             <button type="reset" class="btn btn-secondary ml-2">Сбросить</button>
             <p class="mt-2">Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
         </div>
@@ -190,10 +190,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
-        $.("#registerForm").submit(function(e) {
-            e.preventDefault();
+        function commitForm() {
 
-            var form = $(this);
+            var form = $("#registerForm");
             var url = form.attr('action');
 
             $.ajax({
@@ -206,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     alert(data);
                 }
             });
-        })
+        }
     </script>
 </div>
 </body>
