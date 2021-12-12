@@ -188,16 +188,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $.("#registerForm").on("submit", function(e) {
+        $.("#registerForm").submit(function(e) {
             e.preventDefault();
+
+            var form = $(this);
+            var url = form.attr('action');
+
             $.ajax({
-                method: 'post',
+                type: "POST",
+                url: url,
                 dataType: 'html',
-                data: $(this).serialize(),
-                success: function(data){
+                data: form.serialize(),
+                success: function(data) {
                     $('#formAlert').html(data);
+                    alert(data);
                 }
             });
         })
