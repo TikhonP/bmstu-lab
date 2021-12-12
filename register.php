@@ -64,11 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate confirm password
     if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Подтвердите пароль.";
+        $confirm_password_err = "Подтвердите пароль. ";
     } else {
         $confirm_password = trim($_POST["confirm_password"]);
         if (empty($password_err) && ($password != $confirm_password)) {
-            $confirm_password_err = "Пароли не совпадают.";
+            $confirm_password_err = "Пароли не совпадают. ";
         }
     }
 
@@ -205,7 +205,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 data: form.serialize(),
                 success: function(data) {
                     $('#formAlert').html(data);
-                    alert(data);
                 }
             });
         });
