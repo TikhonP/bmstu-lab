@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty(trim($_POST["email"]))) {
         $email = "";
-    } elseif (!valid_email(trim($_POST["email"]))) {
+    } elseif (valid_email(trim($_POST["email"])) == false) {
         $email_err = "Введите верный email. ";
     } else {
         $email = trim($_POST["email"]);
