@@ -218,7 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     data: form.serialize(),
                     success: function (data) {
                         if (data == 'ok') {
-                            window.location.href = url = '/login.php';
+                            document.location.href = '/login.php';
                         } else {
                             if ($('#formAlert').length) {
                                 $('#formAlert').html(data);
