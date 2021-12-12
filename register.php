@@ -190,22 +190,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
-        function commitForm() {
+        const commitForm = document.getElementById('registerForm');
 
-            var form = $("#registerForm");
-            var url = form.attr('action');
+        commitForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const url = commitForm.attr('action');
 
             $.ajax({
                 type: "POST",
                 url: url,
                 dataType: 'html',
-                data: form.serialize(),
+                data: commitForm.serialize(),
                 success: function(data) {
                     $('#formAlert').html(data);
                     alert(data);
                 }
             });
-        }
+        });
     </script>
 </div>
 </body>
