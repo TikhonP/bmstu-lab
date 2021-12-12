@@ -195,13 +195,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         commitForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const url = commitForm.attr('action');
+            const form = $("#registerForm");
+            const url = form.attr('action');
 
             $.ajax({
                 type: "POST",
                 url: url,
                 dataType: 'html',
-                data: commitForm.serialize(),
+                data: form.serialize(),
                 success: function(data) {
                     $('#formAlert').html(data);
                     alert(data);
