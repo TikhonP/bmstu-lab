@@ -109,7 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
-                header("location: login.php");
+                echo "ok";
+                exit();
             } else {
                 echo "Ой! Что-то пошло не так. Попробуйте еще раз позже.";
                 echo mysqli_stmt_error($stmt);
@@ -216,10 +217,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     dataType: 'html',
                     data: form.serialize(),
                     success: function (data) {
-                        if ($('#formAlert').length) {
-                            $('#formAlert').html(data);
+                        if (data == 'ok') {
+                            window.location.href = url = '/login.php';
                         } else {
-                            $(`<div class="alert alert-danger" role="alert" id="formAlert">${String(data)}</div>`).insertBefore('#registerForm');
+                            if ($('#formAlert').length) {
+                                $('#formAlert').html(data);
+                            } else {
+                                $(`<div class="alert alert-danger" role="alert" id="formAlert">${String(data)}</div>`).insertBefore('#registerForm');
+                            }
                         }
                     }
                 });
