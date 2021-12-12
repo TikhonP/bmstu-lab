@@ -108,109 +108,110 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
     } else {
-        echo ($username_err . $password_err . $confirm_password_err . $email_err);
+        echo($username_err . $password_err . $confirm_password_err . $email_err);
         exit();
     }
 
     // Close connection
     mysqli_close($link);
 } else {
-?>
+    ?>
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Регистрация</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <style>
-        body {
-            font: 14px sans-serif;
-        }
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Регистрация</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
+        <style>
+            body {
+                font: 14px sans-serif;
+            }
 
-        .wrapper {
-            width: 360px;
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
-<div class="container text-center">
-    <h2>Регистрация</h2>
-    <p>Пожалуйста, заполните все поля, чтобы войти в аккаунт.</p>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="registerForm">
-        <div class="alert alert-danger" role="alert" id="formAlert"></div>
+            .wrapper {
+                width: 360px;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container text-center">
+        <h2>Регистрация</h2>
+        <p>Пожалуйста, заполните все поля, чтобы войти в аккаунт.</p>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="registerForm">
+            <div class="form-floating mb-3">
+                <input type="text" name="username"
+                       class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
+                       id="floatingInput"
+                       placeholder="username" value="<?php echo $username; ?>">
+                <label for="floatingInput">Имя пользователя</label>
+                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+            </div>
 
-        <div class="form-floating mb-3">
-            <input type="text" name="username"
-                   class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="floatingInput"
-                   placeholder="username" value="<?php echo $username; ?>">
-            <label for="floatingInput">Имя пользователя</label>
-            <span class="invalid-feedback"><?php echo $username_err; ?></span>
-        </div>
+            <div class="form-floating mb-3">
+                <input type="email" name="email"
+                       class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" id="floatingInputE"
+                       placeholder="username" value="<?php echo $email; ?>">
+                <label for="floatingInputE">Email</label>
+                <span class="invalid-feedback"><?php echo $email_err; ?></span>
+            </div>
 
-        <div class="form-floating mb-3">
-            <input type="email" name="email"
-                   class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" id="floatingInputE"
-                   placeholder="username" value="<?php echo $email; ?>">
-            <label for="floatingInputE">Email</label>
-            <span class="invalid-feedback"><?php echo $email_err; ?></span>
-        </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="password"
+                       class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"
+                       id="floatingPassword"
+                       placeholder="Password" value="<?php echo $password; ?>">
+                <label for="floatingPassword">Пароль</label>
+                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+            </div>
 
-        <div class="form-floating mb-3">
-            <input type="password" name="password"
-                   class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="floatingPassword"
-                   placeholder="Password" value="<?php echo $password; ?>">
-            <label for="floatingPassword">Пароль</label>
-            <span class="invalid-feedback"><?php echo $password_err; ?></span>
-        </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="confirm_password"
+                       class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>"
+                       id="floatingPasswordc" placeholder="Password" value="<?php echo $confirm_password; ?>">
+                <label for="floatingPasswordc">Подтвердите пароль</label>
+                <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
+            </div>
 
-        <div class="form-floating mb-3">
-            <input type="password" name="confirm_password"
-                   class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>"
-                   id="floatingPasswordc" placeholder="Password" value="<?php echo $confirm_password; ?>">
-            <label for="floatingPasswordc">Подтвердите пароль</label>
-            <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
-        </div>
+            <div class="container">
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                <button type="reset" class="btn btn-secondary ml-2">Сбросить</button>
+                <p class="mt-2">Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
+            </div>
+        </form>
+        <footer class="border-top">
+            <div class="container text-center mt-2">
+                <p class="text-secondary">ИУ4-11Б</p>
+            </div>
+        </footer>
 
-        <div class="container">
-            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-            <button type="reset" class="btn btn-secondary ml-2">Сбросить</button>
-            <p class="mt-2">Уже есть аккаунт? <a href="login.php">Войти</a>.</p>
-        </div>
-    </form>
-    <footer class="border-top">
-        <div class="container text-center mt-2">
-            <p class="text-secondary">ИУ4-11Б</p>
-        </div>
-    </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script>
+            const commitForm = document.getElementById('registerForm');
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-        const commitForm = document.getElementById('registerForm');
+            commitForm.addEventListener('submit', function (e) {
+                e.preventDefault();
 
-        commitForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+                const form = $("#registerForm");
+                const url = form.attr('action');
 
-            const form = $("#registerForm");
-            const url = form.attr('action');
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                dataType: 'html',
-                data: form.serialize(),
-                success: function(data) {
-                    $('#formAlert').html(data);
-                }
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    dataType: 'html',
+                    data: form.serialize(),
+                    success: function (data) {
+                        $('<div class="alert alert-danger" role="alert" id="formAlert">${data}</div>').insertBefore('#registerForm');
+                    }
+                });
             });
-        });
-    </script>
-</div>
-</body>
-</html>
+        </script>
+    </div>
+    </body>
+    </html>
 
 <?php } ?>
