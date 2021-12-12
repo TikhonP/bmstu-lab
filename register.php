@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
     } else {
-        echo $username_err . $password_err . $confirm_password_err . $email_err;
+        echo ($username_err . $password_err . $confirm_password_err . $email_err);
         exit();
     }
 
@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $.("#registerForm").submit(function(e) {
             e.preventDefault();
