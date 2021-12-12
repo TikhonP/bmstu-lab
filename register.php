@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate username
     if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter a username.";
+        $username_err = "Введите имя пользователя. ";
     } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))) {
-        $username_err = "Username can only contain letters, numbers, and underscores.";
+        $username_err = "Имя пользователя может включать только буквы, цифры и нижние подчеркивания. ";
     } else {
         // Prepare a select statement
         $sql = "SELECT id FROM users WHERE username = ?";
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    $username_err = "This username is already taken.";
+                    $username_err = "Имя пользователя уже занято. ";
                 } else {
                     $username = trim($_POST["username"]);
                 }
@@ -55,25 +55,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate password
     if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter a password.";
+        $password_err = "Пожалуйста, введите пароль. ";
     } elseif (strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Password must have atleast 6 characters.";
+        $password_err = "Парольдолжен включать, как минимум 6 символов. ";
     } else {
         $password = trim($_POST["password"]);
     }
 
     // Validate confirm password
     if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm password.";
+        $confirm_password_err = "Подтвердите пароль.";
     } else {
         $confirm_password = trim($_POST["confirm_password"]);
         if (empty($password_err) && ($password != $confirm_password)) {
-            $confirm_password_err = "Password did not match.";
+            $confirm_password_err = "Пароли не совпадают.";
         }
     }
 
     if (empty(trim($_POST["email"]))) {
         $email = "";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $email_err = "Введите верный email. ";
     } else {
         $email = trim($_POST["email"]);
     }
@@ -105,15 +107,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Close statement
             mysqli_stmt_close($stmt);
         }
+    } else {
+        echo $username_err . $password_err . $confirm_password_err . $email_err;
+        exit();
     }
 
     // Close connection
     mysqli_close($link);
-}
+} else {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -136,7 +141,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container text-center">
     <h2>Регистрация</h2>
     <p>Пожалуйста, заполните все поля, чтобы войти в аккаунт.</p>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="registerForm">
+        <div class="alert alert-danger" role="alert" id="formAlert"></div>
+
         <div class="form-floating mb-3">
             <input type="text" name="username"
                    class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="floatingInput"
@@ -180,6 +187,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="text-secondary">ИУ4-11Б</p>
         </div>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script>
+        $.("#registerForm").on("submit", function(e) {
+            e.preventDefault();
+            $.ajax({
+                method: 'post',
+                dataType: 'html',
+                data: $(this).serialize(),
+                success: function(data){
+                    $('#formAlert').html(data);
+                }
+            });
+        })
+    </script>
 </div>
 </body>
 </html>
+
+<?php } ?>

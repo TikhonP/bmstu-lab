@@ -98,7 +98,7 @@ if ($user_is_authed) {
         <div class="mt-3">
             <form method="post" action="/rate.php">
                 <label for="customRange2" class="form-label">Оценить продукт</label>
-                <input type="range" name="rate" class="form-range" min="0" max="5" id="customRange2">
+                <input type="range" name="rate" class="form-range" min="1" max="5" id="customRange2">
                 <input type="hidden" name="product" value="<?= $product_id ?>">
                 <button type="submit" class="btn btn-primary">Оценить</button>
             </form>
