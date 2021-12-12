@@ -205,7 +205,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     dataType: 'html',
                     data: form.serialize(),
                     success: function (data) {
-                        $('<div class="alert alert-danger" role="alert" id="formAlert">${data}</div>').insertBefore('#registerForm');
+                        if ($('#formAlert').length) {
+                            $('#formAlert').html(data);
+                        } else {
+                            $(`<div class="alert alert-danger" role="alert" id="formAlert">${String(data)}</div>`).insertBefore('#registerForm');
+                        }
                     }
                 });
             });
