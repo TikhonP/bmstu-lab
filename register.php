@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($_POST["password"]))) {
         $password_err = "Пожалуйста, введите пароль. ";
     } elseif (strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Парольдолжен включать, как минимум 6 символов. ";
+        $password_err = "Пароль должен включать, как минимум 6 символов. ";
     } else {
         $password = trim($_POST["password"]);
     }
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty(trim($_POST["email"]))) {
         $email = "";
-    } elseif (!valid_email($email)) {
+    } elseif (!valid_email(trim($_POST["email"]))) {
         $email_err = "Введите верный email. ";
     } else {
         $email = trim($_POST["email"]);
